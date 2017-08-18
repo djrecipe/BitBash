@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Output directories
+bin/
+obj/
+.vs/
