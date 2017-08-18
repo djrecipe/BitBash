@@ -74,7 +74,7 @@ namespace Abaci.JPI.Tests
             // create factory and endpoint
             RemotePayloadFactoryStub factory = new RemotePayloadFactoryStub("https://abaci.jpi.tests", payloads);
             // retrieve payload
-            List <TestPayload> payload = factory.Get<TestPayloadCollection>();
+            List <TestPayload> payload = factory.Get<List<TestPayload>>();
             // test
             Assert.AreEqual(2, payload.Count, "Payload count mismatch");
             Assert.AreEqual("test 1", payload[0].Content);

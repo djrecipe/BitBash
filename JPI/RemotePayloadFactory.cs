@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -12,6 +13,36 @@ namespace Abaci.JPI
     /// </summary>
     public class RemotePayloadFactory
     {
+        #region Static Methods
+        private static EndpointAttribute GetEndpointAttribute(Type type, out bool is_array)
+        {
+            Type element_type = null;
+            // get element type of array
+            if (type.IsArray)
+            {
+                element_type = type.GetElementType();
+                is_array = true;
+            }
+            // get element type of list
+            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                element_type = type.GetGenericArguments()[0];
+                is_array = true;
+            }
+            // assume not in an array
+            else
+            {
+                element_type = type;
+                is_array = false;
+            }
+            // retrieve EndpointAttribute
+            object[] attributes = element_type.GetCustomAttributes(typeof(EndpointAttribute), true);
+            if (attributes.Length < 1)
+                throw new JsonException(string.Format("Type '{0}' does not have an EndpointAttribute", type.FullName));
+            EndpointAttribute attribute = attributes[0] as EndpointAttribute;
+            return attribute;
+        }
+        #endregion
         #region Instance Members
         private readonly JsonSerializerSettings serializationSettings = new JsonSerializerSettings();
         #endregion
@@ -42,13 +73,18 @@ namespace Abaci.JPI
         /// <returns>Retrieved payload</returns>
         public T Get<T>()
         {
-            object[] attributes = typeof(T).GetCustomAttributes(typeof(EndpointAttribute), true);
-            if(attributes.Length < 1)
-                throw new ArgumentException("Endpoint does not have an EndpointAttribute");
-            EndpointAttribute attribute = attributes[0] as EndpointAttribute;
+            // get endpoint attribute info
+            Type type = typeof(T);
+            bool is_array = false;
+            EndpointAttribute attribute = RemotePayloadFactory.GetEndpointAttribute(type, out is_array);
+            // construct path
             string path = string.Format("{0}/{1}", this.RootPath, attribute.SubPath);
+            // retrieve from path
             JObject obj = this.RetrieveRemote(path);
-            string result = string.IsNullOrWhiteSpace(attribute.Token) ? obj.ToString() : obj.SelectToken(attribute.Token).ToString();
+            // select token
+            string token = is_array ? attribute.ListToken : attribute.SingleToken;
+            string result = string.IsNullOrWhiteSpace(token) ? obj.ToString() : obj.SelectToken(token).ToString();
+            // deserialize into object
             return JsonConvert.DeserializeObject<T>(result, this.serializationSettings);
         }
         /// <summary>

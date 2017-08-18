@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="Stubs\RemotePayloadFactoryStub.cs" />
     <Compile Include="Stubs\TestPayload.cs" />
-    <Compile Include="Stubs\TestPayloadCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestRemovePayloadFactory.cs" />
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace Abaci.JPI.Coinbase
 
         public List<CoinbaseCurrency> Get()
         {
-            return this.payloadFactory.Get<CoinbaseCurrencyCollection>();
+            return this.payloadFactory.Get<List<CoinbaseCurrency>>();
         }
     }
 }

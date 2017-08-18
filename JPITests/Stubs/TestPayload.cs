@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 namespace Abaci.JPI.Tests.Stubs
 {
     [JsonObject(MemberSerialization.OptIn)]
+    [Endpoint(SubPath = "testpayloadretrieval", ListToken = "data")]
     public class TestPayload
     {
         [JsonProperty("content")]
