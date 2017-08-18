@@ -34,4 +34,5 @@
 # Output directories
 bin/
 obj/
+packages/
 .vs/
