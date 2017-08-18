@@ -10,7 +10,7 @@ namespace Abaci.JPI.Tests.Stubs
     public class RemotePayloadFactoryStub : RemotePayloadFactory
     {
         private readonly Dictionary<string, string> payloads = null;
-        public RemotePayloadFactoryStub(Dictionary<string, string> payloads)
+        public RemotePayloadFactoryStub(string path, Dictionary<string, string> payloads) : base(path)
         {
             this.payloads = payloads;
             return;

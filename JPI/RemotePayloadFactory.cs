@@ -16,14 +16,18 @@ namespace Abaci.JPI
         private readonly JsonSerializerSettings serializationSettings = new JsonSerializerSettings();
         #endregion
         #region Instance Properties
+        public string RootPath { get; }
         #endregion
         #region Instance Methods
         /// <summary>
         /// Create a new instance associated with the specified remote path
         /// </summary>
         /// <param name="path">Root for remote retrieval requests</param>
-        public RemotePayloadFactory()
+        public RemotePayloadFactory(string path)
         {
+            if(string.IsNullOrWhiteSpace(path))
+                throw new ArgumentException("Invalid root path for remote payload factory", nameof(path));
+            this.RootPath = path;
             this.serializationSettings = new JsonSerializerSettings
             {
                 ObjectCreationHandling = ObjectCreationHandling.Reuse,
@@ -35,16 +39,23 @@ namespace Abaci.JPI
         /// Retrieve payload of the specified type from the specified remote endpoint
         /// </summary>
         /// <typeparam name="T">Payload type</typeparam>
-        /// <param name="endpoint">Remote endpoint information</param>
-        /// <param name="token">Json token to select</param>
         /// <returns>Retrieved payload</returns>
-        public T Get<T>(EndpointPath endpoint, string token)
+        public T Get<T>()
         {
-            string path = endpoint.GetFullPath();
+            object[] attributes = typeof(T).GetCustomAttributes(typeof(EndpointAttribute), true);
+            if(attributes.Length < 1)
+                throw new ArgumentException("Endpoint does not have an EndpointAttribute");
+            EndpointAttribute attribute = attributes[0] as EndpointAttribute;
+            string path = string.Format("{0}/{1}", this.RootPath, attribute.SubPath);
             JObject obj = this.RetrieveRemote(path);
-            string result = string.IsNullOrWhiteSpace(token) ? obj.ToString() : obj.SelectToken(token).ToString();
+            string result = string.IsNullOrWhiteSpace(attribute.Token) ? obj.ToString() : obj.SelectToken(attribute.Token).ToString();
             return JsonConvert.DeserializeObject<T>(result, this.serializationSettings);
         }
+        /// <summary>
+        /// Retrieve a JSON object from the specified remote path
+        /// </summary>
+        /// <param name="remote_path">Remote retrieval path</param>
+        /// <returns>Generic JSON object</returns>
         protected virtual JObject RetrieveRemote(string remote_path)
         {
             // create web request

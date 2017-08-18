@@ -60,20 +60,21 @@ namespace Abaci.JPI.Tests
         #endregion
 
         [TestMethod]
-        public void TestPayloadRetrieval()
+        public void TestPayloadRetrievalStub()
         {
             // expected
-            string url = "https://abaci.jpi.tests/testpayloadretrieval";
+            string root_path = "https://abaci.jpi.tests";
+            string sub_path = "testpayloadretrieval";
+            string path = string.Format("{0}/{1}", root_path, sub_path);
             string payload_str = "{\"data\": [\n {\"content\": \"test 1\"\n}, {\"content\": \"test 2\"\n}]}";
             Dictionary<string, string> payloads = new Dictionary<string, string>()
             {
-                {url, payload_str}
+                {path, payload_str}
             };
             // create factory and endpoint
-            RemotePayloadFactoryStub factory = new RemotePayloadFactoryStub(payloads);
-            EndpointPath path = new EndpointPath(url);
+            RemotePayloadFactoryStub factory = new RemotePayloadFactoryStub("https://abaci.jpi.tests", payloads);
             // retrieve payload
-            List <TestPayload> payload = factory.Get<List<TestPayload>>(path, "data");
+            List <TestPayload> payload = factory.Get<TestPayloadCollection>();
             // test
             Assert.AreEqual(2, payload.Count, "Payload count mismatch");
             Assert.AreEqual("test 1", payload[0].Content);

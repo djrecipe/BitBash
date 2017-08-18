@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC818B3A-C73F-49D8-AD77-7BE6ED096AEA}</ProjectGuid>
+    <ProjectGuid>{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Abaci.JPI.Tests</RootNamespace>
-    <AssemblyName>Abaci.JPI.Tests</AssemblyName>
+    <RootNamespace>Abaci.JPI.Coinbase.Tests</RootNamespace>
+    <AssemblyName>Abaci.JPI.Coinbase.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,10 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -49,28 +45,19 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-          <Private>False</Private>
-        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Stubs\RemotePayloadFactoryStub.cs" />
-    <Compile Include="Stubs\TestPayload.cs" />
-    <Compile Include="Stubs\TestPayloadCollection.cs" />
+    <Compile Include="CoinbaseJPITests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestRemovePayloadFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JPI\JPI.csproj">
-      <Project>{704b05fc-3489-46df-982a-53b5e9df769c}</Project>
-      <Name>JPI</Name>
+    <ProjectReference Include="..\CoinbaseJPI\CoinbaseJPI.csproj">
+      <Project>{3e993e11-654d-4af8-9c4b-04379791b76d}</Project>
+      <Name>CoinbaseJPI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

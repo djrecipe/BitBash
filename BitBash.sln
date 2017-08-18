@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinbaseTrader", "CoinbaseT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPITests", "JPITests\JPITests.csproj", "{AC818B3A-C73F-49D8-AD77-7BE6ED096AEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinbaseJPITests", "CoinbaseJPITests\CoinbaseJPITests.csproj", "{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AC818B3A-C73F-49D8-AD77-7BE6ED096AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC818B3A-C73F-49D8-AD77-7BE6ED096AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC818B3A-C73F-49D8-AD77-7BE6ED096AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D66E32-F93A-4A3D-B183-4F257F3C3A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
