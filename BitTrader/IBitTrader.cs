@@ -1,6 +1,4 @@
-﻿using BitTrade;
-
-namespace Abaci.BitTrade
+﻿namespace Abaci.BitTrader
 {
     public interface IBitTrader : IBitSeller, IBitBuyer
     {

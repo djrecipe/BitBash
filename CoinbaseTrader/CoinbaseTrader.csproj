@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{543330F0-A354-4A07-86F4-842DB57FC6E3}</ProjectGuid>
+    <ProjectGuid>{9CEEC683-29A8-49FF-8313-36F3B1F6BE3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Abaci.BitTrade</RootNamespace>
-    <AssemblyName>Abaci.BitTrade</AssemblyName>
+    <RootNamespace>Abaci.BitTrader.Coinbase</RootNamespace>
+    <AssemblyName>Abaci.BitTrader.Coinbase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBitBuyer.cs" />
-    <Compile Include="IBitSeller.cs" />
-    <Compile Include="IBitTrader.cs" />
+    <Compile Include="CoinbaseTrader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitTrader\BitTrader.csproj">
+      <Project>{543330f0-a354-4a07-86f4-842db57fc6e3}</Project>
+      <Name>BitTrader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoinbaseJPI\CoinbaseJPI.csproj">
+      <Project>{3e993e11-654d-4af8-9c4b-04379791b76d}</Project>
+      <Name>CoinbaseJPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -104,9 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BitTrade\BitTrade.csproj">
+    <ProjectReference Include="..\BitTrader\BitTrader.csproj">
       <Project>{543330f0-a354-4a07-86f4-842db57fc6e3}</Project>
-      <Name>BitTrade</Name>
+      <Name>BitTrader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

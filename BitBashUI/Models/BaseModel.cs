@@ -1,4 +1,4 @@
-﻿using Abaci.BitTrade;
+﻿using Abaci.BitTrader;
 
 namespace Abaci.BitBash.UI.Models
 {
