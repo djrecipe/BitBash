@@ -7,9 +7,13 @@ namespace Abaci.JPI.Coinbase
     {
         private RemotePayloadFactory payloadFactory = new RemotePayloadFactory("https://api.coinbase.com/v2");
 
-        public List<CoinbaseCurrency> Get()
+        public List<CoinbaseCurrency> GetCurrencies()
         {
             return this.payloadFactory.Get<List<CoinbaseCurrency>>();
+        }
+        public List<CoinbaseExchangeRate> GetExchangeRates()
+        {
+            return this.payloadFactory.Get<List<CoinbaseExchangeRate>>();
         }
     }
 }

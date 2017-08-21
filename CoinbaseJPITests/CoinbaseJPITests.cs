@@ -9,11 +9,18 @@ namespace Abaci.JPI.Coinbase.Tests
     public class CoinbaseJPITests
     {
         [TestMethod]
-        public void TestCurrencyRetrieval()
+        public void TestCurrenciesRetrieval()
         {
             CoinbaseJPI jpi = new CoinbaseJPI();
-            List<CoinbaseCurrency> currencies = jpi.Get();
+            List<CoinbaseCurrency> currencies = jpi.GetCurrencies();
             Assert.IsTrue(currencies.Any(c => c.ID.ToUpper() == "BTC"), "Failed to find BTC currency");
+            return;
+        }
+        [TestMethod]
+        public void TestExchangeRatesRetrieval()
+        {
+            CoinbaseJPI jpi = new CoinbaseJPI();
+            List<CoinbaseExchangeRate> exchange_rates = jpi.GetExchangeRates();
             return;
         }
     }

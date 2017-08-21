@@ -1,16 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Abaci.JPI.Coinbase.JSON
 {
     [JsonObject(MemberSerialization.OptIn)]
-    [Endpoint(SubPath = "currencies", ListToken = "data")]
-    public class CoinbaseCurrency
+    [Endpoint(SubPath = "exchange-rates", ListToken = "data")]
+    public class CoinbaseExchangeRate
     {
-        [JsonProperty("id")]
+        [JsonProperty("currency")]
         public string ID { get; set; }
-        [JsonProperty("min_size")]
-        public double Minimum { get; set; }
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("rates")]
+        public Dictionary<string, double> Rates { get; set; }
     }
 }
