@@ -11,9 +11,9 @@ namespace Abaci.JPI.Coinbase
         {
             return this.payloadFactory.Get<List<CoinbaseCurrency>>();
         }
-        public List<CoinbaseExchangeRate> GetExchangeRates()
+        public CoinbaseExchangeRate GetExchangeRate(string currency)
         {
-            return this.payloadFactory.Get<List<CoinbaseExchangeRate>>();
+            return this.payloadFactory.Get<CoinbaseExchangeRate>();
         }
     }
 }
