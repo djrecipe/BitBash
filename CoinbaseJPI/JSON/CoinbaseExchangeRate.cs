@@ -14,7 +14,22 @@ namespace Abaci.JPI.Coinbase.JSON
         }
         [JsonProperty("currency")]
         public string ID { get; set; }
+        public Dictionary<string, double> Rates { get; private set; } = new Dictionary<string, double>();
         [JsonProperty("rates", ItemIsReference = true, ReferenceLoopHandling = ReferenceLoopHandling.Serialize)]
-        public Dictionary<string, string> Rates { get; set; } = new Dictionary<string, string>();
+        private Dictionary<string, string> RatesData
+        {
+            set
+            {
+                this.Rates.Clear();
+                if (value == null)
+                    return;
+                foreach(KeyValuePair<string, string> pair in value)
+                {
+                    double dbl_value = 0.0;
+                    double.TryParse(pair.Value, out dbl_value);
+                    this.Rates.Add(pair.Key, dbl_value);
+                }
+            }
+        }
     }
 }

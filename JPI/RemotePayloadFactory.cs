@@ -70,15 +70,34 @@ namespace Abaci.JPI
         /// Retrieve payload of the specified type from the specified remote endpoint
         /// </summary>
         /// <typeparam name="T">Payload type</typeparam>
+        /// <param name="name">Optional parameter name to append to the final url</param>
+        /// <param name="value">Optional parameter value to append to the final url</param>
         /// <returns>Retrieved payload</returns>
-        public T Get<T>()
+        public T Get<T>(string name, object value)
+        {
+            return this.Get<T>(new Dictionary<string, object> { { name, value } });
+        }
+        /// <summary>
+        /// Retrieve payload of the specified type from the specified remote endpoint
+        /// </summary>
+        /// <typeparam name="T">Payload type</typeparam>
+        /// <param name="parameters">Optional parameter values to append to the final url</param>
+        /// <returns>Retrieved payload</returns>
+        public T Get<T>(Dictionary<string, object> parameters = null)
         {
             // get endpoint attribute info
             Type type = typeof(T);
             bool is_array = false;
             EndpointAttribute attribute = RemotePayloadFactory.GetEndpointAttribute(type, out is_array);
             // construct path
-            string path = string.Format("{0}/{1}", this.RootPath, attribute.SubPath);
+            string sub_url = "";
+            if (parameters != null && parameters.Count > 0)
+                sub_url = "/?";
+            foreach(KeyValuePair<string, object> pair in parameters)
+            {
+                sub_url += string.Format("{0}={1}", pair.Key, pair.Value.ToString());
+            }
+            string path = string.Format("{0}/{1}{2}", this.RootPath, attribute.SubPath, sub_url);
             // retrieve from path
             JObject obj = this.RetrieveRemote(path);
             // select token

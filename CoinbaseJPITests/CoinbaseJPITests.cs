@@ -30,9 +30,9 @@ namespace Abaci.JPI.Coinbase.Tests
             Assert.IsNotNull(exchange_rate, "Failed to retrieve exchange rate");
             Assert.IsNotNull(exchange_rate.Rates, "Failed to retrieve exchange rate values");
             Assert.IsTrue(exchange_rate.Rates.Count > 0, "Retrieved an empty exchange rate value list");
-            foreach (KeyValuePair<string, string> pair in exchange_rate.Rates)
+            foreach (KeyValuePair<string, double> pair in exchange_rate.Rates)
             {
-                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+                Console.WriteLine("{0}: {1:0.00000}", pair.Key, pair.Value);
             }
             return;
         }
