@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoinbaseJPI.cs" />
+    <Compile Include="JSON\CoinbaseUnitSellPrice.cs" />
     <Compile Include="JSON\CoinbaseCurrency.cs" />
     <Compile Include="JSON\CoinbaseExchangeRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

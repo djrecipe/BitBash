@@ -83,21 +83,33 @@ namespace Abaci.JPI
         /// <typeparam name="T">Payload type</typeparam>
         /// <param name="parameters">Optional parameter values to append to the final url</param>
         /// <returns>Retrieved payload</returns>
-        public T Get<T>(Dictionary<string, object> parameters = null)
+        public T Get<T>(Dictionary<string, object> parameters)
+        {           
+            // construct path
+            string sub_url = "";
+            if (parameters != null && parameters.Count > 0)
+            {
+                sub_url = "/?";
+                foreach (KeyValuePair<string, object> pair in parameters)
+                {
+                    sub_url += string.Format("{0}={1}", pair.Key, pair.Value.ToString());
+                }
+            }
+            return this.Get<T>(sub_url);
+        }
+        /// <summary>
+        /// Retrieve payload of the specified type from the specified remote endpoint
+        /// </summary>
+        /// <typeparam name="T">Payload type</typeparam>
+        /// <param name="sub_url">Optional sub url to append to the final url</param>
+        /// <returns>Retrieved payload</returns>
+        public T Get<T>(string sub_url = null)
         {
             // get endpoint attribute info
             Type type = typeof(T);
             bool is_array = false;
             EndpointAttribute attribute = RemotePayloadFactory.GetEndpointAttribute(type, out is_array);
-            // construct path
-            string sub_url = "";
-            if (parameters != null && parameters.Count > 0)
-                sub_url = "/?";
-            foreach(KeyValuePair<string, object> pair in parameters)
-            {
-                sub_url += string.Format("{0}={1}", pair.Key, pair.Value.ToString());
-            }
-            string path = string.Format("{0}/{1}{2}", this.RootPath, attribute.SubPath, sub_url);
+            string path = string.Format("{0}/{1}{2}", this.RootPath, attribute.SubPath, sub_url ?? "");
             // retrieve from path
             JObject obj = this.RetrieveRemote(path);
             // select token

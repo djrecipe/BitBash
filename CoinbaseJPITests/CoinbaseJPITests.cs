@@ -9,11 +9,17 @@ namespace Abaci.JPI.Coinbase.Tests
     [TestClass]
     public class CoinbaseJPITests
     {
+        private CoinbaseJPI jpi = null;
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.jpi = new CoinbaseJPI();
+        }
         [TestMethod]
         public void TestCurrenciesRetrieval()
         {
-            CoinbaseJPI jpi = new CoinbaseJPI();
-            List<CoinbaseCurrency> currencies = jpi.GetCurrencies();
+            List<CoinbaseCurrency> currencies = this.jpi.GetCurrencies();
+            Assert.IsNotNull(currencies, "Failed to retrieve currency list");
             foreach(CoinbaseCurrency currency in currencies)
             {
                 Console.WriteLine(currency.Name);
@@ -23,10 +29,9 @@ namespace Abaci.JPI.Coinbase.Tests
             return;
         }
         [TestMethod]
-        public void TestExchangeRatesRetrieval()
+        public void TestSingleExchangeRatesRetrieval()
         {
-            CoinbaseJPI jpi = new CoinbaseJPI();
-            CoinbaseExchangeRate exchange_rate = jpi.GetExchangeRate("USD");
+            CoinbaseExchangeRate exchange_rate = this.jpi.GetExchangeRate("USD");
             Assert.IsNotNull(exchange_rate, "Failed to retrieve exchange rate");
             Assert.IsNotNull(exchange_rate.Rates, "Failed to retrieve exchange rate values");
             Assert.IsTrue(exchange_rate.Rates.Count > 0, "Retrieved an empty exchange rate value list");
@@ -34,6 +39,20 @@ namespace Abaci.JPI.Coinbase.Tests
             {
                 Console.WriteLine("{0}: {1:0.00000}", pair.Key, pair.Value);
             }
+            return;
+        }
+        [TestMethod]
+        public void TestUnitBuyPriceRetrieval()
+        {
+            double price = this.jpi.GetUnitPrice(CoinbaseJPI.Currency.BTC, CoinbaseJPI.PriceType.Buy);
+            Console.WriteLine("{0:0.00}", price);
+            return;
+        }
+        [TestMethod]
+        public void TestUnitSellPriceRetrieval()
+        {
+            double price = this.jpi.GetUnitPrice(CoinbaseJPI.Currency.BTC, CoinbaseJPI.PriceType.Sell);
+            Console.WriteLine("{0:0.00}", price);
             return;
         }
     }
