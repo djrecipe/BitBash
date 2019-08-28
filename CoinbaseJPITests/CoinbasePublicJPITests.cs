@@ -6,15 +6,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Abaci.JPI.Coinbase.Tests
 {
+    /// <summary>
+    /// Test Coinbase-specific public (non-authenticated) API actions
+    /// </summary>
     [TestClass]
-    public class CoinbaseJPITests
+    public class CoinbasePublicJPITests
     {
         private CoinbaseJPI jpi = null;
+        /// <summary>
+        /// Initialize the test infrastructure
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
             this.jpi = new CoinbaseJPI();
         }
+        /// <summary>
+        /// Test retrieval of currency names
+        /// </summary>
         [TestMethod]
         public void TestCurrenciesRetrieval()
         {
@@ -22,12 +31,15 @@ namespace Abaci.JPI.Coinbase.Tests
             Assert.IsNotNull(currencies, "Failed to retrieve currency list");
             foreach(CoinbaseCurrency currency in currencies)
             {
-                Console.WriteLine(currency.Name);
+                Console.WriteLine("{0} : {1}", currency.ID, currency.Name);
             }
             Assert.IsTrue(currencies.Count > 0, "Retrieved an empty currency list");
-            Assert.IsTrue(currencies.Any(c => c.ID.ToUpper() == "BTC"), "Failed to find BTC currency");
+            Assert.IsTrue(currencies.Any(c => c.ID.ToUpper() == "USD"), "Failed to find USD currency");
             return;
         }
+        /// <summary>
+        /// Test retrieval of currency exchange rates (compared to USD)
+        /// </summary>
         [TestMethod]
         public void TestSingleExchangeRatesRetrieval()
         {
@@ -41,6 +53,9 @@ namespace Abaci.JPI.Coinbase.Tests
             }
             return;
         }
+        /// <summary>
+        /// Test retrieval of buy price for BTC
+        /// </summary>
         [TestMethod]
         public void TestUnitBuyPriceRetrieval()
         {
@@ -48,6 +63,9 @@ namespace Abaci.JPI.Coinbase.Tests
             Console.WriteLine("{0:0.00}", price);
             return;
         }
+        /// <summary>
+        /// Test retrieval of sell price for BTC
+        /// </summary>
         [TestMethod]
         public void TestUnitSellPriceRetrieval()
         {
