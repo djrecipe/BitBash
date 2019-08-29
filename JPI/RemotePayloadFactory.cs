@@ -111,7 +111,7 @@ namespace Abaci.JPI
             EndpointAttribute attribute = RemotePayloadFactory.GetEndpointAttribute(type, out is_array);
             string path = string.Format("{0}/{1}{2}", this.RootPath, attribute.SubPath, sub_url ?? "");
             // retrieve from path
-            JObject obj = this.RetrieveRemote(path);
+            JObject obj = this.RetrieveRemote(path, attribute.Authenticated);
             // select token
             string token = is_array ? attribute.ListToken : attribute.SingleToken;
             string result = string.IsNullOrWhiteSpace(token) ? obj.ToString() : obj.SelectToken(token).ToString();
@@ -123,7 +123,7 @@ namespace Abaci.JPI
         /// </summary>
         /// <param name="remote_path">Remote retrieval path</param>
         /// <returns>Generic JSON object</returns>
-        protected virtual JObject RetrieveRemote(string remote_path)
+        protected virtual JObject RetrieveRemote(string remote_path, bool authenticated)
         {
             // create web request
             HttpWebRequest request = HttpWebRequest.Create(remote_path) as HttpWebRequest;

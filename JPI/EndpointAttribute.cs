@@ -10,6 +10,10 @@ namespace Abaci.JPI
     {
         #region Instance Properties
         /// <summary>
+        /// Requires authentication to connect to remote endpoint
+        /// </summary>
+        public bool Authenticated { get; set; } = false;
+        /// <summary>
         /// JSON token to select when deserializing a list of the associated type
         /// </summary>
         public string ListToken { get; set; }

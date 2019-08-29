@@ -36,3 +36,5 @@ bin/
 obj/
 packages/
 .vs/
+BitBash.sln.DotSettings.user
+BitBash.sln.DotSettings

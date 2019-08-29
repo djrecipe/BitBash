@@ -3,7 +3,7 @@
 namespace Abaci.JPI.Coinbase.JSON
 {
     [JsonObject(MemberSerialization.OptIn)]
-    [Endpoint(SubPath = "currencies", ListToken = "data")]
+    [Endpoint(SubPath = "currencies", ListToken = "data", Authenticated = false)]
     public class CoinbaseCurrency
     {
         [JsonProperty("id")]

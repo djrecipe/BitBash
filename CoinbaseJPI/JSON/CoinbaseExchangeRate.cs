@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Abaci.JPI.Coinbase.JSON
 {
     [JsonObject(MemberSerialization.OptIn)]
-    [Endpoint(SubPath = "exchange-rates", SingleToken = "data")]
+    [Endpoint(SubPath = "exchange-rates", SingleToken = "data", Authenticated = false)]
     public class CoinbaseExchangeRate
     {
         public class ExchangeRateValue

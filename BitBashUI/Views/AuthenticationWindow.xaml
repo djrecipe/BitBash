@@ -1,0 +1,19 @@
+﻿<Window x:Class="Abaci.BitBash.UI.Views.AuthenticationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Abaci.BitBash.UI.Views"
+        xmlns:eo="http://schemas.essentialobjects.com/wpf/"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d"
+        Title="Authentication" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <wpf:ChromiumWebBrowser VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" Address="{Binding URL}">
+
+        </wpf:ChromiumWebBrowser>
+    </Grid>
+</Window>

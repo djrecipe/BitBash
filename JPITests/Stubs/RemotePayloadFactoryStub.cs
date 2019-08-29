@@ -15,7 +15,7 @@ namespace Abaci.JPI.Tests.Stubs
             this.payloads = payloads;
             return;
         }
-        protected override JObject RetrieveRemote(string remote_path)
+        protected override JObject RetrieveRemote(string remote_path, bool authenticated)
         {
             if (!this.payloads.ContainsKey(remote_path))
                 return null;
